@@ -58,13 +58,13 @@ This key needs to be stored in the /shared folder of the project to make the nec
 Clone the project
 
 ```bash
-  git clone [https://link-to-project](https://github.com/taoofstefan/credit_card_fraud_detection.git)
+  git clone https://github.com/taoofstefan/credit_card_fraud_detection.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd credit_card_fraud_detection-main
 ```
 
 Start the project using Docker
