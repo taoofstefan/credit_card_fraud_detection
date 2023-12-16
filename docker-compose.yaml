@@ -1,0 +1,49 @@
+version: '3'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+
+  train_model:
+    build:
+      context: .
+      dockerfile: Dockerfile.train_model
+    container_name: train_model
+    volumes:
+      - ./train_model:/app/train_model
+      - model_volume:/models
+
+  producer:
+    build:
+      context: .
+      dockerfile: Dockerfile.producer
+    container_name: producer
+    volumes:
+      - ./make_predictions:/app/producer
+      - model_volume:/models
+    depends_on:
+      - train_model
+
+  consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile.consumer
+    container_name: consumer
+    volumes:
+      - ./make_predictions:/app/consumer
+      - model_volume:/models
+    depends_on:
+      - producer
+      - kafka
+
+volumes:
+  model_volume:  # Define the shared volume

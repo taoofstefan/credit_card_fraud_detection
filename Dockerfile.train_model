@@ -1,0 +1,26 @@
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory to /app/train_model
+WORKDIR /app/train_model
+
+# Copy only the requirements first to leverage Docker caching
+COPY shared/requirements.txt .
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the Kaggle API key
+COPY shared/kaggle.json /root/.kaggle/
+# Secure the directory
+RUN chmod 600 /root/.kaggle/kaggle.json
+
+# Create the /models directory
+RUN mkdir /models
+
+# Copy the rest of the code
+COPY train_model/train_model.py .
+COPY train_model/functions.py .
+
+# Run train_model.py when the container launches
+CMD ["python", "train_model.py"]
