@@ -6,7 +6,13 @@ This project is a comprehensive machine learning system designed to detect fraud
 
 The core of the system is the machine learning model, an XGBoost classifier, trained to identify patterns indicative of fraud. The model is trained on a preprocessed dataset where features have been standardized and class imbalances addressed using SMOTE (Synthetic Minority Over-sampling Technique). This preprocessing step is crucial for the model’s performance, as it ensures that the minority class (fraudulent transactions) is adequately represented.
 
-Once trained, the model’s performance is evaluated using a variety of metrics, including precision, recall, and F1 score, to ensure its effectiveness in detecting fraudulent transactions. A confusion matrix is also generated and visualized to provide insights into the model’s prediction capabilities.
+Once trained, the model’s performance is evaluated using a variety of metrics, including precision, recall, and F1 score, to ensure its effectiveness in detecting fraudulent transactions.
+
+<p align="center">
+  <img src="https://github.com/taoofstefan/credit_card_fraud_detection/blob/main/documentation/train_model_scores.png" width="500" height=auto alt="Training Scores">
+</p>
+
+A confusion matrix is also generated and visualized to provide insights into the model’s prediction capabilities.
 
 <p align="center">
   <img src="https://github.com/taoofstefan/credit_card_fraud_detection/blob/main/documentation/confusion_matrix.png" width="500" height=auto alt="Confusion Matrix">
