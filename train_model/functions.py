@@ -58,12 +58,3 @@ def create_confusion_matrix(y_test, y_pred):
 # Function to download a dataset from Kaggle
 def download_dataset(api, dataset_name, download_path):
     api.dataset_download_files(dataset_name, path=download_path, unzip=True)
-
-# Function to get the current time with nanosecond precision
-def get_current_time():
-    current_time_ns = time.time_ns()  # Get the current time in nanoseconds
-    seconds = current_time_ns // 1_000_000_000
-    nanoseconds = current_time_ns % 1_000_000_000
-    formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(seconds))
-    current_time = f"{formatted_time}.{nanoseconds:09d}"
-    return current_time

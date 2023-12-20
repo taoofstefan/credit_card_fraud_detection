@@ -5,6 +5,14 @@ import json
 import sqlite3
 
 if __name__ == "__main__":
+    # Checks every second if the new ML model has been trained
+    # Once trained, it starts the producer
+    model_ready_path = '/models/xgb_model.pkl'
+    while not os.path.exists(model_ready_path):
+        time.sleep(1) 
+
+    consume_messages()
+
     # Connect to the SQLite database
     conn = sqlite3.connect('fraud_detection.db')
     cursor = conn.cursor()
@@ -32,10 +40,6 @@ if __name__ == "__main__":
     # Create an empty DataFrame for potential fraud
     potential_fraud = pd.DataFrame(columns=columns)
 
-    # Add a delay before creating the KafkaConsumer
-    time.sleep(40)  # Adjust the delay as needed
-
-    print("Consumer is starting...")
     # Kafka Consumer
     consumer = KafkaConsumer('my-topic', bootstrap_servers='kafka:9092', 
                                  value_deserializer=lambda m: json.loads(m.decode('utf-8')))

@@ -20,6 +20,9 @@ from kaggle.api.kaggle_api_extended import KaggleApi
 
 import joblib
 
+from kafka import KafkaConsumer
+from kafka.errors import NoBrokersAvailable
+
 # Function to preprocess the dataset
 def preprocess_data(df):
     # Standardize 'Amount' column using StandardScaler
@@ -34,23 +37,6 @@ def handle_imbalanced_data(X, y):
     X_resampled, y_resampled = smote.fit_resample(X, y)
     return X_resampled, y_resampled
 
-# Function to train an XGBoost model
-def train_xgboost_model(X_train, y_train):
-    xgb_model = XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42)
-    xgb_model.fit(X_train, y_train)
-    return xgb_model
-
-# Function to evaluate the trained model
-def evaluate_model(model, X_test, y_test):
-    y_pred = model.predict(X_test)
-    precision, recall, _ = precision_recall_curve(y_test, model.predict_proba(X_test)[:, 1])
-    auc_pr = auc(recall, precision)
-    return y_pred, auc_pr
-
-# Function to create a confusion matrix
-def create_confusion_matrix(y_test, y_pred):
-    return confusion_matrix(y_test, y_pred)
-
 # Function to download a dataset from Kaggle
 def download_dataset(api, dataset_name, download_path):
     api.dataset_download_files(dataset_name, path=download_path, unzip=True)
@@ -63,3 +49,32 @@ def get_current_time():
     formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(seconds))
     current_time = f"{formatted_time}.{nanoseconds:09d}"
     return current_time
+
+# Create and return a KafkaConsumer instance.
+def create_consumer():
+    return KafkaConsumer('my-topic', bootstrap_servers='kafka:9092')
+
+# Consume messages from Kafka topic 'my-topic'.
+def consume_messages():
+    consumer = None
+    max_retries = 6
+    retries = 0
+
+    while retries < max_retries:
+        try:
+            # Attempt to create a KafkaConsumer
+            consumer = create_consumer()
+            print("Consumer is starting...")
+            break  # Exit the loop if consumer is successfully created
+        except NoBrokersAvailable:
+            # Handle the case when no brokers are available
+            retries += 1
+            print(f"Retrying in 10 seconds (retry {retries}/{max_retries})...")
+            time.sleep(10)
+        except Exception as e:
+            # Handle other exceptions that may occur during consumer creation
+            print(f"An error occurred: {e}")
+        finally:
+            # Close the consumer if it was created but encountered an issue
+            if consumer:
+                consumer.close()

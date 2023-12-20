@@ -4,7 +4,11 @@ import time
 import json
 
 if __name__ == "__main__":
-    time.sleep(35)  # Adjust the delay as needed
+    # Checks every second if the new ML model has been trained
+    # Once trained, it starts the producer
+    model_ready_path = '/models/xgb_model.pkl'
+    while not os.path.exists(model_ready_path):
+        time.sleep(1)
 
     # Connect to Kaggle
     api = KaggleApi()
@@ -45,7 +49,5 @@ if __name__ == "__main__":
         # Send data to Kafka
         producer.send('my-topic', sampled_row.to_dict())
 
-
-print("Producer finished sending messages.")
 producer.close()
 print("Producer closed.")
