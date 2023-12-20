@@ -9,9 +9,6 @@ from imblearn.over_sampling import SMOTE
 import pandas as pd
 import numpy as np
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 import os
 from datetime import datetime, timedelta
 import time
@@ -19,9 +16,12 @@ import time
 from kaggle.api.kaggle_api_extended import KaggleApi
 
 import joblib
+import sqlite3
 
+from kafka import KafkaProducer
 from kafka import KafkaConsumer
 from kafka.errors import NoBrokersAvailable
+import json
 
 # Function to preprocess the dataset
 def preprocess_data(df):

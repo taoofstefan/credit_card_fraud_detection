@@ -3,14 +3,10 @@ from xgboost import XGBClassifier
 
 import pandas as pd
 import numpy as np
-import json
+import os
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-import os
-from datetime import datetime, timedelta
-import time
 
 from kaggle.api.kaggle_api_extended import KaggleApi
 
@@ -18,10 +14,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_curve, auc
 from sklearn.metrics import confusion_matrix
-
 from imblearn.over_sampling import SMOTE
-from xgboost import XGBClassifier
-import joblib
 
 # Function to preprocess the dataset
 def preprocess_data(df):

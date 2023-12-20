@@ -1,7 +1,6 @@
 from functions import *
-from kafka import KafkaProducer
-import time
-import json
+# from kafka import KafkaProducer
+# import json
 
 if __name__ == "__main__":
     # Checks every second if the new ML model has been trained

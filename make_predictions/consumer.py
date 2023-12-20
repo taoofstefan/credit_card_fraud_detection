@@ -1,8 +1,4 @@
 from functions import *
-from kafka import KafkaConsumer
-import time
-import json
-import sqlite3
 
 if __name__ == "__main__":
     # Checks every second if the new ML model has been trained
