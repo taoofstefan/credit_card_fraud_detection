@@ -1,0 +1,14 @@
+.data-table-container {
+    overflow-x: auto;
+}
+.data-table {
+    margin-top: 20px;
+    width: 100%;
+}
+.data-table td, .data-table th {
+    text-align: center;
+}
+/* Custom striped rows */
+.data-table tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light grey for odd rows */
+}
