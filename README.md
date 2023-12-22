@@ -84,7 +84,7 @@ The frontend is optimized for performance and efficiency. It features efficient 
 While focused on user experience and functionality, the frontend also adheres to best practices in web security and performance optimization. It employs strict input validation and sanitization to safeguard against SQL injection, especially in search functionalities. Secure HTTP headers, including Content Security Policy and X-Content-Type-Options, are rigorously applied to prevent cross-site scripting and content type sniffing. Additionally, the system leverages Flask’s built-in session management for secure, encrypted session handling, preventing session hijacking and ensuring data is transmitted securely. Error handling is meticulously managed to prevent leakage of sensitive information, with Flask's custom error pages concealing technical error details from end users.
 
 ## Project Flowchart
-![Credit Card Fraud Detection Backend](https://github.com/taoofstefan/credit_card_fraud_detection/blob/main/documentation/credit%20card%20fraud%20kaggle%20back%20end.png)
+![Credit Card Fraud Detection Backend](https://github.com/taoofstefan/credit_card_fraud_detection/blob/main/documentation/credit%20card%20fraud%20kaggle%20backend%20frontend.png)
 
 ## Requirements
 To run this project you need to install Docker on your system.
