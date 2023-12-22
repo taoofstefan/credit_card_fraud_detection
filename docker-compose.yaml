@@ -41,9 +41,20 @@ services:
     volumes:
       - ./make_predictions:/app/consumer
       - model_volume:/models
+      - data_volume:/data
     depends_on:
       - producer
       - kafka
 
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "5000:5000"
+    volumes:
+      - data_volume:/data
+
 volumes:
-  model_volume:  # Define the shared volume
+  model_volume: # Shared volume for trained ML model
+  data_volume:  # Shared volume for the database

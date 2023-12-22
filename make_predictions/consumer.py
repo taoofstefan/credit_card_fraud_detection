@@ -10,7 +10,7 @@ if __name__ == "__main__":
     consume_messages()
 
     # Connect to the SQLite database
-    conn = sqlite3.connect('fraud_detection.db')
+    conn = sqlite3.connect('/data/fraud_detection.db')
     cursor = conn.cursor()
 
     # Check if the table exists, and create it if not
@@ -65,10 +65,10 @@ if __name__ == "__main__":
             # Use the string representation for 'Time' column
             X_sample['Time'] = current_time_str
                        
-            print("Potential fraud detected:", current_time)
+            # print("Potential fraud detected:", current_time)
 
             # Connect to the SQLite database
-            conn = sqlite3.connect('fraud_detection.db')
+            conn = sqlite3.connect('/data/fraud_detection.db')
             cursor = conn.cursor()
             
             # Insert the potential fraud data into the database

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        .data-table-container {
+            overflow-x: auto;
+        }
+        .data-table {
+            margin-top: 20px;
+            width: 100%; /* Responsive to the container's width */
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid"> <!-- Changed to container-fluid -->
+        <h1 class="mt-5 text-center">Potential Fraud Transactions</h1>
+        {% for table in tables %}
+            <div class="data-table-container">
+                <table class="table table-bordered table-hover data-table">
+                    {{ table|safe }}
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -8,3 +8,7 @@ imbalanced-learn==0.8.0
 joblib==1.0.1
 kaggle==1.5.12
 kafka-python==2.0.2
+Flask==1.1.2
+Jinja2==3.0.3
+itsdangerous==2.0.1
+Werkzeug==1.0.1
